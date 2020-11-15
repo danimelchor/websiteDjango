@@ -1,0 +1,415 @@
+body {
+  background: #111;
+}
+
+.navbar {
+  background-color: black;
+}
+.navbar .navbar-contents {
+  width: 50vw;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+.navbar .navbar-contents .navbar-main {
+  display: inline-block;
+}
+.navbar .navbar-contents .navbar-main img {
+  max-width: 10vw;
+  margin-right: 1.5vw;
+}
+.navbar .navbar-contents .navbar-login {
+  float: right;
+  display: inline-block;
+}
+.navbar .navbar-contents .navbar-login a {
+  padding-right: 0;
+}
+.navbar .navbar-contents a {
+  color: white;
+  padding: 1vw 0.4vw;
+  line-height: 1vw;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.home-container {
+  background-color: #111;
+  height: 100vh;
+  width: 100vw;
+}
+.home-container .home-socials {
+  max-width: 5vw;
+  top: 50%;
+  transform: translate(0, -50%);
+  position: fixed;
+}
+.home-container .home-socials span {
+  color: gray;
+  font-size: 12px;
+  width: 3vw;
+  text-align: center;
+  display: block;
+  margin-bottom: 5px;
+}
+.home-container .home-socials .home-socials-item {
+  text-align: center;
+  border: 0 none;
+  width: 3vw;
+  height: 3vw;
+}
+.home-container .home-socials .home-socials-item a {
+  color: white;
+  font-size: 2em;
+  line-height: 3vw;
+}
+.home-container .home-desc {
+  color: white;
+  max-width: 100vw;
+  display: block;
+  height: 40vh;
+  position: absolute;
+}
+.home-container .home-desc .home-desc-container {
+  width: 30vw;
+  position: fixed;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+.home-container .home-desc .home-desc-container h1 {
+  font-size: 4em;
+  margin-bottom: 3vh;
+  position: static;
+  display: inline-block;
+  vertical-align: bottom;
+  font-family: monospace;
+}
+.home-container .home-desc .home-desc-container .home-desc-p {
+  font-size: 1.4em;
+  line-height: 1.7em;
+  display: block;
+  position: static;
+  font-family: monospace;
+  text-align: justify;
+}
+.home-container .home-desc .home-desc-container #home-desc-p-last {
+  margin-top: 2vw;
+}
+.home-container .home-desc .home-desc-container .home-desc-cursor {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 4em;
+  background: white;
+  margin-bottom: 3vh;
+}
+.home-container .home-desc .home-desc-container .home-desc-cursor-p {
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 1.2em;
+  background: white;
+}
+.home-container .home-desc .home-desc-container .homeDescCursorTyping {
+  opacity: 0;
+}
+.home-container .home-desc .home-desc-container .homeDescCursorTypingDone {
+  animation: cursorBlink 1.2s infinite;
+}
+@keyframes cursorBlink {
+  49% {
+    background: white;
+  }
+  50% {
+    background: transparent;
+  }
+  99% {
+    background: transparent;
+  }
+}
+.home-container .home-portfolio-arrow {
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  right: 1%;
+  transform: translate(-50%, -50%);
+  color: #dcdcdc;
+}
+.home-container .home-portfolio-arrow p {
+  font-size: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+}
+.home-container .home-portfolio-arrow i {
+  font-size: 3em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.projects-container {
+  width: 60vw;
+  margin: 0 auto;
+  background: #111;
+  padding: 4vw;
+  color: white;
+}
+.projects-container h1 {
+  color: #ddd;
+  font-weight: bold;
+  font-size: 2.5em;
+  margin: 1vw 0;
+  margin-left: 0.4vw;
+}
+.projects-container .projects-filters, .projects-container .projects-current-filters {
+  margin: 10px 0;
+  margin-left: 0.4vw;
+}
+.projects-container .projects-filters ul, .projects-container .projects-current-filters ul {
+  display: block;
+  color: white;
+  font-size: 0.9em;
+}
+.projects-container .projects-filters ul li, .projects-container .projects-current-filters ul li {
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #333;
+  padding: 8px 10px;
+  margin: 3px;
+  cursor: pointer;
+}
+.projects-container .projects-current-filters {
+  background: #222;
+  padding: 4px 5px;
+  border-radius: 5px;
+  min-height: 2.4vw;
+}
+.projects-container .projects-current-filters ul {
+  display: inline-block;
+}
+.projects-container .projects-current-filters ul li span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.projects-container .projects-current-filters ul li i {
+  color: #aaa;
+  display: inline-block;
+  vertical-align: middle;
+}
+.projects-container .projects-current-filters ul li .projects-current-filters-bar {
+  height: 0.9em;
+  margin: 0 5px;
+  width: 1px;
+  border-left: 1px solid #aaa;
+  display: inline-block;
+  vertical-align: middle;
+}
+.projects-container .projects-current-filters .projects-current-search {
+  float: right;
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 0.42em;
+}
+.projects-container .projects-container-list {
+  text-align: center;
+}
+.projects-container .projects-container-list .project-item {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 2vw 0.4vw;
+}
+.projects-container .projects-container-list .project-item .project-titlebar {
+  text-align: left;
+  border-radius: 5px 5px 0 0;
+  background-color: gray;
+  box-sizing: border-box;
+  padding: 0.3vw 0.5vw;
+}
+.projects-container .projects-container-list .project-item .project-titlebar ul {
+  display: inline-block;
+  width: 12%;
+}
+.projects-container .projects-container-list .project-item .project-titlebar ul li {
+  border-radius: 100%;
+  width: 0.6vw;
+  height: 0.6vw;
+  margin: 0 1px;
+  display: inline-block;
+}
+.projects-container .projects-container-list .project-item .project-titlebar ul #titlebar-1 {
+  background-color: red;
+}
+.projects-container .projects-container-list .project-item .project-titlebar ul #titlebar-2 {
+  background-color: orange;
+}
+.projects-container .projects-container-list .project-item .project-titlebar ul #titlebar-3 {
+  background-color: green;
+}
+.projects-container .projects-container-list .project-item .project-titlebar h2 {
+  display: inline-block;
+  position: relative;
+  left: 37%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 0.95em;
+}
+.projects-container .projects-container-list .project-item img {
+  background-color: white;
+  width: 25vw;
+  height: 16vw;
+  position: absolute;
+  border-radius: 0 0 5px 5px;
+  transform: translateX(-50%);
+}
+.projects-container .projects-container-list .project-item .projects-item-hover {
+  width: 25vw;
+  height: 16vw;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+.projects-container .projects-container-list .project-item .projects-item-hover div {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  width: 25vw;
+  height: 16vw;
+  border-radius: 0 0 5px 5px;
+}
+.projects-container .projects-container-list .project-item .projects-item-hover div span {
+  display: block;
+  color: #aaa;
+  width: 50%;
+  text-align: right;
+  font-size: 1em;
+  padding: 0.8vw;
+  position: relative;
+  top: 0;
+  left: 100%;
+  transform: translate(-100%, 0);
+  box-sizing: border-box;
+  height: 18%;
+}
+.projects-container .projects-container-list .project-item .projects-item-hover div ul {
+  display: block;
+  color: white;
+  font-size: 0.9em;
+  position: relative;
+  top: 32%;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+}
+.projects-container .projects-container-list .project-item .projects-item-hover div ul li {
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #333;
+  padding: 8px 10px;
+  margin: 3px 1px;
+}
+.projects-container .project-item:hover .projects-item-hover {
+  opacity: 1;
+}
+
+.contact-container {
+  width: 60vw;
+  margin: 0 auto;
+  background: #111;
+  padding: 4vw;
+  color: white;
+}
+.contact-container h1 {
+  color: #ddd;
+  font-weight: bold;
+  font-size: 2.5em;
+  margin: 1vw 0;
+}
+.contact-container .contact-form-tags .contact-form-tag {
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #333;
+  padding: 8px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  opacity: 0;
+}
+.contact-container .contact-form-tags .contact-form-tag i {
+  margin-right: 9px;
+  display: inline-block;
+}
+.contact-container .contact-form-tags .contact-form-tag p {
+  display: inline-block;
+}
+.contact-container .contact-form-input {
+  position: relative;
+  padding: 10px 0;
+  margin-top: 20px;
+}
+.contact-container .contact-form-input .contact-input {
+  padding: 7px 0;
+  background-color: #111;
+  color: #eee;
+  border-bottom: 2px solid #bbb;
+  font-size: 1.3em;
+  width: 50vw;
+  display: block;
+  margin-bottom: 21px;
+  transition: border-color 0.2s;
+}
+.contact-container .contact-form-input .contact-input::placeholder {
+  color: transparent;
+}
+.contact-container .contact-form-input .contact-input:placeholder-shown ~ .contact-label {
+  top: 30%;
+  cursor: text;
+  pointer-events: none;
+  font-size: 1.3em;
+}
+.contact-container .contact-form-input .contact-label {
+  position: absolute;
+  display: block;
+  transition: 0.2s;
+  top: 0;
+  font-size: 0.9em;
+  color: #bbb;
+}
+.contact-container .contact-form-input .contact-input:focus {
+  outline: 0 none;
+  border-bottom: 3px solid #0576e8;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.contact-container .contact-form-input .contact-input:focus ~ .contact-label {
+  color: #0576e8;
+  top: 0;
+  font-size: 0.9em;
+  transition: 0.2s;
+  font-weight: bold;
+}
+.contact-container .contact-button-inactive {
+  border: 2px solid #bbb;
+  background: transparent;
+  margin-right: 10px;
+  padding: 14px 26px;
+  color: #bbb;
+  border-radius: 2px;
+  font-size: 1.2em;
+  display: inline-block;
+  width: 6vw;
+  cursor: not-allowed;
+}
+.contact-container .contact-button-inactive:focus {
+  outline: 0 none;
+}
+.contact-container .contactButtonActive:hover {
+  border: 3px solid #0576e8;
+  color: #0576e8;
+  font-weight: bold;
+  padding: 13px 25px;
+  cursor: pointer;
+}
+.contact-container .contact-success {
+  color: green;
+  font-size: 6em;
+}
+
+/*# sourceMappingURL=main.css.map */

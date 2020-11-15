@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="projects-container" id="filterapp">
+  <h1>web developer portfolio</h1>
+  <div class="projects-current-filters">
+    <ul>
+      <li v-for="activeFilter in activeFilters"><span>[[ activeFilter ]]</span><div class="projects-current-filters-bar"></div><i class="far fa-times-circle" v-on:click="removeFilter(activeFilter)"></i></li>
+    </ul>
+    <div class="projects-current-search">
+      <i class="fas fa-search"></i>
+    </div>
+  </div>
+  <div class="projects-filters">
+    <ul>
+      <li v-for="filter in filters" v-on:click="addFilter(filter)">[[ filter ]]</li>
+    </ul>
+  </div>
+  <div class="projects-container-list">
+      <div v-for="project in projects" class="project-item" ref="project">
+        <div class="project-titlebar">
+            <ul>
+              <li id="titlebar-1"></li>
+              <li id="titlebar-2"></li>
+              <li id="titlebar-3"></li>
+            </ul>
+            <h2>[[ project.project_name ]]</h2>
+        </div>
+        <img :src="'{% static 'img/' %}' + project.project_img">
+        <div class="projects-item-hover">
+          <div>
+            <span>[[ project.date ]]</span>
+            <ul>
+              <li v-for="i in project.project_tags">[[ i ]]</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock content %}
+{% block script %}
+<script>
+var tags = ["HTML","CSS","PHP","Jquery","Python","Django","VueJS","SASS","JavaScript"];
+
+function sendRequest(url, method, data) {
+  var r = axios({
+    method: method,
+    url: url,
+    data: data,
+    xsrfCookieName: 'csrftoken',
+    xsrfHeader: 'X-CSRFToken',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  });
+
+  return r
+}
+
+var app = new Vue({
+  el: '#filterapp',
+  delimiters: ['[[',']]'],
+  data: {
+    filters: tags,
+    activeFilters: [],
+    projects: {}
+  },
+  methods: {
+    addFilter(filter) {
+      this.activeFilters.push(filter);
+      this.filters.splice(this.filters.indexOf(filter),1);
+      this.filter();
+    },
+    removeFilter(filter) {
+      this.filters.push(filter);
+      this.activeFilters.splice(this.activeFilters.indexOf(filter),1);
+      this.filter();
+    },
+    filter() {
+      for (var i = 0; i < this.projectId.length; i++) {
+        var match = true;
+
+        for (var j = 0; j < this.activeFilters.length; j++) {
+          if (!projectTag[i].includes(this.activeFilters[j])) {
+            match = false;
+          }
+        }
+
+        if(!match) {
+          this.projects[i].style.display = 'none';
+        } else {
+          this.projects[i].style.display = 'inline-block';
+        }
+      }
+    }
+  },
+  created() {
+    var vm = this;
+    var r = sendRequest('','get')
+      .then(function(response) {
+        vm.projects = response.data.projects;
+
+        for(i=0;i < vm.projects.length;i++) {
+          vm.projects[i].date = vm.projects[i].date.slice(0,10).split('-');
+          vm.projects[i].date = vm.projects[i].date[1] + '/' + vm.projects[i].date[2] + '/' + vm.projects[i].date[0];
+        }
+      });
+  }
+})
+
+</script>
+{% endblock %}

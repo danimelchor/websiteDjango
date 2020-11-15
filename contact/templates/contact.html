@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="contact-container" id="contactapp">
+  {% csrf_token %}
+  <form @submit.prevent="sendEmail">
+    <h1>contact</h1>
+    <div class="contact-form-tags">
+      <div class="contact-form-tag" v-on:click="goNext(1)" v-bind:style="{ opacity: checkOpacity(0) }"><i class="fas fa-user"></i><p>[[ name ]]</p></div>
+      <div class="contact-form-tag" v-on:click="goNext(2)" v-bind:style="{ opacity: checkOpacity(1) }"><i class="fas fa-envelope"></i><p>[[ email ]]</p></div>
+    </div>
+    <div class="contact-form-input" ref="nameDiv">
+      <input @keyup="testInput('name')" v-model="name" type="text" ref="name" name="name" placeholder="Full name" class="contact-input">
+      <label ref="nameLabel" for="name" class="contact-label">Full name</label>
+    </div>
+    <div class="contact-form-input" ref="emailDiv" style="display:none">
+      <input @keyup="testInput('email')" v-model="email" type="text" ref="email" name="email" placeholder="Email address" class="contact-input">
+      <label ref="emailLabel" for="email" class="contact-label">Email address</label>
+    </div>
+    <div class="contact-form-input" ref="messageDiv" style="display:none">
+      <input @keyup="testInput('message')" v-model="message" type="text" ref="message" name="message" placeholder="Message" class="contact-input">
+      <label ref="messageLabel" for="message" class="contact-label">Message</label>
+    </div>
+    <div class="contact-button-inactive contactButtonActive" v-on:click="goNext(0)">Next</div>
+    <input type="submit" name="submit" class="contact-button-inactive" :class="{ contactButtonActive: done }" value="Submit">
+    <p v-if="success" class="contact-success">Success!</p>
+  </form>
+</div>
+{% endblock content %}
+{% block script %}
+<script>
+function sendRequest(url, method, data) {
+  var r = axios({
+    method: method,
+    url: url,
+    data: data,
+    xsrfCookieName: 'csrftoken',
+    xsrfHeader: 'X-CSRFToken',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  });
+
+  return r
+}
+
+new Vue({
+  el: '#contactapp',
+  delimiters: ["[[","]]"],
+  data: {
+    name: '',
+    email: '',
+    message: '',
+    current: [0,0],
+    done: false,
+    emailValid: false,
+    nameValid: false,
+    messageValid: false,
+    checkedEmail: false,
+    checkedMessage: false,
+    success: false
+  },
+  methods: {
+    goNext: function(n) {
+      if(n == 0) {
+        if (JSON.stringify(this.current) == JSON.stringify([0,0])) {
+          if(this.nameValid) {
+            this.current = [1,0];
+            this.$refs.nameDiv.style.display = 'none';
+            this.$refs.emailDiv.style.display = 'block';
+            this.$refs.email.focus();
+          }
+        } else if (JSON.stringify(this.current) == JSON.stringify([1,0])) {
+          this.checkedEmail = true;
+
+          if(this.emailValid) {
+            this.current = [1,1];
+            this.$refs.emailDiv.style.display = 'none';
+            this.$refs.messageDiv.style.display = 'block';
+            this.$refs.message.focus();
+            this.done = true;
+          }
+        }
+      }
+
+      if(n == 1) {
+        this.current = [0,0];
+        this.$refs.nameDiv.style.display = 'block';
+        this.$refs.emailDiv.style.display = 'none';
+        this.$refs.messageDiv.style.display = 'none';
+        this.$refs.name.focus();
+      } else if(n == 2) {
+        this.current = [1,0];
+        this.$refs.nameDiv.style.display = 'none';
+        this.$refs.emailDiv.style.display = 'block';
+        this.$refs.messageDiv.style.display = 'none';
+        this.$refs.email.focus();
+      }
+    },
+    checkOpacity: function(n) {
+      return this.current[n];
+    },
+    testInput: function(s) {
+      var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      this.messageValid = this.message.length > 10;
+      this.nameValid = this.name.length > 0;
+      this.emailValid = (this.email.length > 0) && this.email.match(mailformat);
+
+      if(!this.nameValid && s == 'name') {
+        this.$refs.name.style.borderColor = "red";
+        this.$refs.nameLabel.style.color = "red";
+      } else {
+        this.$refs.name.style.borderColor = "#0576e8";
+        this.$refs.nameLabel.style.color = "#0576e8";
+      }
+
+      if(!this.emailValid && s == 'email' && this.checkedEmail) {
+        this.$refs.email.style.borderColor = "red";
+        this.$refs.emailLabel.style.color = "red";
+      } else {
+        this.$refs.email.style.borderColor = "#0576e8";
+        this.$refs.emailLabel.style.color = "#0576e8";
+      }
+
+      if(!this.messageValid && s == 'message' && this.checkedMessage) {
+        this.$refs.message.style.borderColor = "red";
+        this.$refs.messageLabel.style.color = "red";
+      } else {
+        this.$refs.message.style.borderColor = "#0576e8";
+        this.$refs.messageLabel.style.color = "#0576e8";
+      }
+    },
+    sendEmail: function() {
+      var vm = this;
+
+      this.checkedMessage = true;
+      this.testInput('message');
+
+      if(this.emailValid && this.nameValid && this.messageValid) {
+        var formData = new FormData();
+        formData.append('name',this.name);
+        formData.append('email',this.email);
+        formData.append('message',this.message);
+
+        sendRequest('','post',formData)
+          .then(function(response) {
+            vm.success = response.data.success;
+          });
+      }
+    }
+  },
+  created() {
+    window.addEventListener('keydown', (e) => {
+      if (e.key == 'Enter') {
+        if(JSON.stringify(this.current) == JSON.stringify([1,1])) {
+          this.sendEmail();
+        } else {
+          this.goNext(0);
+        }
+      }
+    });
+  }
+})
+</script>
+{% endblock %}
