@@ -10,18 +10,15 @@ class ContactView(View):
         return render(request, 'contact.html')
 
     def post(self,request):
-        bounded_form = EmailForm(request.POST)
+        email_name = request.POST['name']
+        email_email = request.POST['email']
+        email_message = request.POST['message']
 
-        if bounded_form.is_valid():
-            email_name = bounded_form['name']
-            email_email = bounded_form['email']
-            email_message = bounded_form['message']
+        send_mail(
+            email_name,
+            email_message + '\n\nSent by: ' + email_email,
+            email_email,
+            ['dmelchorwebsite@gmail.com']
+        )
 
-            send_mail(
-                email_name,
-                email_message,
-                email_email,
-                ['dmelchorwebsite@gmail.com']
-            )
-
-            return JsonResponse({ 'success': True }, status=200)
+        return JsonResponse({ 'success': True }, status=200)

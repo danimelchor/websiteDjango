@@ -5,12 +5,6 @@ from django.http import JsonResponse
 
 from .models import Project
 
-# def projects(request):
-#     context = {
-#         'projects': Project.objects.all()
-#     }
-#     return render(request, 'projects.html', context)
-
 class ProjectsView(View):
     def get(self, request):
         context = {

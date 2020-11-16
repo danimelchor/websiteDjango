@@ -4,7 +4,7 @@ def home(request):
     context = {
         'socials': [{
                 'icon': 'fas fa-envelope',
-                'a': '#',
+                'a': 'mailto:dmh672@gmail.com',
                 'color': '#EA4335'
             },{
                 'icon': 'fab fa-github',

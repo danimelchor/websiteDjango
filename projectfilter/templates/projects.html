@@ -17,7 +17,7 @@
     </ul>
   </div>
   <div class="projects-container-list">
-      <div v-for="project in projects" class="project-item" ref="project">
+      <div v-for="project in projects" class="project-item" v-bind:class="{ displayProject: project.display }">
         <div class="project-titlebar">
             <ul>
               <li id="titlebar-1"></li>
@@ -41,7 +41,7 @@
 {% endblock content %}
 {% block script %}
 <script>
-var tags = ["HTML","CSS","PHP","Jquery","Python","Django","VueJS","SASS","JavaScript"];
+var tags = ["HTML","CSS","PHP","JQuery","Python","Django","Vue.js","SASS","JavaScript","DeckGL"];
 
 function sendRequest(url, method, data) {
   var r = axios({
@@ -78,19 +78,19 @@ var app = new Vue({
       this.filter();
     },
     filter() {
-      for (var i = 0; i < this.projectId.length; i++) {
+      for (var i = 0; i < this.projects.length; i++) {
         var match = true;
 
         for (var j = 0; j < this.activeFilters.length; j++) {
-          if (!projectTag[i].includes(this.activeFilters[j])) {
+          if (!this.projects[i].project_tags.includes(this.activeFilters[j])) {
             match = false;
           }
         }
 
         if(!match) {
-          this.projects[i].style.display = 'none';
+          this.projects[i].display = false;
         } else {
-          this.projects[i].style.display = 'inline-block';
+          this.projects[i].display = true;
         }
       }
     }
@@ -104,6 +104,9 @@ var app = new Vue({
         for(i=0;i < vm.projects.length;i++) {
           vm.projects[i].date = vm.projects[i].date.slice(0,10).split('-');
           vm.projects[i].date = vm.projects[i].date[1] + '/' + vm.projects[i].date[2] + '/' + vm.projects[i].date[0];
+
+          vm.projects[i].project_tags = vm.projects[i].project_tags.split(',');
+          vm.projects[i].display = true;
         }
       });
   }

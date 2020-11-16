@@ -1,6 +1,11 @@
 $dark-gray : #222;
 $bg : #111;
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
   background: $bg;
 }
@@ -38,6 +43,9 @@ body {
       display: inline-block;
       text-decoration: none;
     }
+
+    .navbar-pc-a { display: inline-block; }
+    .navbar-mobile-a { display: none; }
   }
 }
 
@@ -241,7 +249,7 @@ body {
     text-align: center;
 
     .project-item {
-      display: inline-block;
+      display: none;
       vertical-align: middle;
       margin: 2vw 0.4vw;
 
@@ -345,6 +353,10 @@ body {
           }
         }
       }
+    }
+
+    .displayProject {
+      display: inline-block;
     }
   }
 
@@ -469,7 +481,185 @@ body {
   }
 
   .contact-success {
-    color: green;
-    font-size: 6em;
+    color: #0b6;
+    font-size: 1.6em;
+    margin: 20px 0;
+  }
+}
+
+/*------------------------------------__*/
+$breakpoint-mobile: 600px;
+$breakpoint-tablet: 1200px;
+@media (max-width: $breakpoint-mobile) {
+  .navbar {
+    .navbar-contents {
+      width: 95vw;
+      text-align: center;
+
+      .navbar-main {
+        img {
+            max-width: 55vw;
+            margin-right: 5vw;
+        }
+      }
+
+      a {
+        padding-top: 5vw;
+        padding-bottom: 5vw;
+      }
+
+      .navbar-pc-a { display: none; }
+      .navbar-mobile-a { display: inline-block;; }
+    }
+  }
+
+  .home-container {
+    .home-desc {
+      .home-desc-container {
+        width: 80vw;
+        left: 50%;
+
+        h1 {
+          font-size: 2.4em;
+        }
+      }
+    }
+
+    .home-socials {
+      max-width: 70vw;
+      top: 95%;
+      font-size: 0;
+
+      span {
+        display: none;
+      }
+
+      .home-socials-item {
+        width: 12vw;
+        height: 12vw;
+        display: inline-block;
+
+        a {
+          line-height: inherit;
+          font-size: 10vw;
+        }
+      }
+    }
+
+    .home-portfolio-arrow {
+      top: 95%;
+      right: 5%;
+      transform: translate(0,-50%);
+    }
+  }
+
+  .projects-container {
+    width: 95vw;
+
+    h1 {
+      font-size: 1.8em;
+      margin: 7vw 0;
+    }
+
+    .projects-current-filters {
+      min-height: 11vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85vw;
+
+      .projects-current-search {
+        float: right;
+        position: absolute;
+        top: 50%;
+        right: 2%;
+        transform: translateY(-50%);
+        display: inline-block;
+        font-size: 1.2em;
+        padding: 0.42em;
+      }
+    }
+
+    .projects-filters {
+      text-align: center;
+      margin-bottom: 10vw;
+    }
+
+    .projects-container-list {
+      .displayProject {
+        display: block;
+      }
+
+      .project-item {
+        margin: 10vw 0;
+
+        .project-titlebar {
+          border-radius: 2px 2px 0 0;
+          padding: 2vw 3vw;
+
+          ul {
+            width: 13vw;
+
+            li {
+              width: 3vw;
+              height: 3vw;
+            }
+          }
+
+          h2 {
+            left: 32%;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 58vw;
+          position: static;
+          transform: none;
+          border-radius: 0 0 2px 2px;
+          object-fit: cover;
+        }
+
+        .projects-item-hover {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .contact-container {
+    width: 95vw;
+
+    h1 {
+      text-align: center;
+      margin: 5vw 0;
+    }
+
+    .contact-form-tags {
+      .contact-form-tag {
+        max-width: 45%;
+
+        p {
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 80%;
+        }
+      }
+    }
+
+    .contact-form-input {
+      width: 100%;
+
+      .contact-input {
+        width: 100%;
+      }
+    }
+
+    .contact-button-inactive {
+      width: 30%;
+      text-align: center;
+      padding: 14px 0;
+    }
   }
 }
