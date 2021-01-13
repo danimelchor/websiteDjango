@@ -10,6 +10,7 @@ class Project(models.Model):
     project_img = models.CharField(max_length=100)
     project_tags = models.CharField(max_length=300)
     date = models.DateTimeField(default=timezone.now)
+    project_link = models.CharField(max_length=300)
 
     def __str__(self):
         return self.project_name

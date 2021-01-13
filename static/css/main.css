@@ -233,6 +233,10 @@ body {
   vertical-align: middle;
   margin: 2vw 0.4vw;
 }
+.projects-container .projects-container-list .project-item a {
+  text-decoration: none;
+  color: inherit;
+}
 .projects-container .projects-container-list .project-item .project-titlebar {
   text-align: left;
   border-radius: 5px 5px 0 0;
@@ -469,6 +473,10 @@ body {
     width: 46%;
     margin: 1.3vw;
   }
+  .projects-container .projects-container-list .project-item a {
+    text-decoration: none;
+    color: inherit;
+  }
   .projects-container .projects-container-list .project-item .project-titlebar {
     border-radius: 2px 2px 0 0;
   }
@@ -582,6 +590,10 @@ body {
   }
   .projects-container .projects-container-list .project-item {
     margin: 10vw 0;
+  }
+  .projects-container .projects-container-list .project-item a {
+    text-decoration: none;
+    color: inherit;
   }
   .projects-container .projects-container-list .project-item .project-titlebar {
     border-radius: 2px 2px 0 0;

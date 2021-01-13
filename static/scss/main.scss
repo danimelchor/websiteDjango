@@ -257,6 +257,11 @@ body {
       vertical-align: middle;
       margin: 2vw 0.4vw;
 
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+
       .project-titlebar {
         text-align: left;
         border-radius: 5px 5px 0 0;
@@ -566,6 +571,11 @@ $breakpoint-tablet: 1200px;
         width: 46%;
         margin: 1.3vw;
 
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+
         .project-titlebar {
           border-radius: 2px 2px 0 0;
 
@@ -708,6 +718,11 @@ $breakpoint-tablet: 1200px;
 
       .project-item {
         margin: 10vw 0;
+
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
 
         .project-titlebar {
           border-radius: 2px 2px 0 0;

@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 <div class="projects-container" id="filterapp">
-  <h1>web developer portfolio</h1>
+  <h1>my web developer portfolio</h1>
   <div class="projects-current-filters">
     <ul>
       <li v-for="activeFilter in activeFilters"><span>[[ activeFilter ]]</span><div class="projects-current-filters-bar"></div><i class="far fa-times-circle" v-on:click="removeFilter(activeFilter)"></i></li>
@@ -18,23 +18,25 @@
   </div>
   <div class="projects-container-list">
       <div v-for="project in projects" class="project-item" v-bind:class="{ displayProject: project.display }">
-        <div class="project-titlebar">
-            <ul>
-              <li id="titlebar-1"></li>
-              <li id="titlebar-2"></li>
-              <li id="titlebar-3"></li>
-            </ul>
-            <h2>[[ project.project_name ]]</h2>
-        </div>
-        <img :src="'{% static 'img/' %}' + project.project_img">
-        <div class="projects-item-hover">
-          <div>
-            <span>[[ project.date ]]</span>
-            <ul>
-              <li v-for="i in project.project_tags">[[ i ]]</li>
-            </ul>
+        <a :href="project.project_link">
+          <div class="project-titlebar">
+              <ul>
+                <li id="titlebar-1"></li>
+                <li id="titlebar-2"></li>
+                <li id="titlebar-3"></li>
+              </ul>
+              <h2>[[ project.project_name ]]</h2>
           </div>
-        </div>
+          <img :src="'{% static 'img/' %}' + project.project_img">
+          <div class="projects-item-hover">
+            <div>
+              <span>[[ project.date ]]</span>
+              <ul>
+                <li v-for="i in project.project_tags">[[ i ]]</li>
+              </ul>
+            </div>
+          </div>
+        </a>
       </div>
   </div>
 </div>
